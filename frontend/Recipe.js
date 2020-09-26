@@ -15,20 +15,31 @@ export default class Recipe extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				{/* {this.state.users.map((user) => {
-					return (
-						<View
-							style={{ flexDirection: 'row', marginLeft: 20, marginRight: 20 }}
-						>
-							<Text style={{ fontSize: 24, fontWeight: 'bold' }}>
-								{this.recipes.current.title}
-							</Text>
-							<Text style={{ marginLeft: 'auto', fontSize: 20 }}>
-								{this.current.ingredients}
-							</Text>
-						</View>
-					);
-				})} */}
+				{
+					recipes.map((recipe) => {
+						if (recipe.key == current) {
+							return (
+								<View
+									style={{ flexDirection: 'row', marginLeft: 20, marginRight: 20 }}
+								>
+									<Text style={{ fontSize: 24, fontWeight: 'bold' }}>
+										{recipe.title}
+									</Text>
+									<Text style={{ marginLeft: 'auto', fontSize: 20 }}>
+										{recipe.content}
+									</Text>
+									<Text style={{ marginLeft: 'auto', fontSize: 20 }}>
+										{
+											recipe.ingredients.map((ingredient) => {
+												return (<Text>{ingredient}</Text>)
+											})
+										}
+									</Text>
+								</View>
+							);
+						}
+					})
+				}
 			</View>
 		);
 	}
