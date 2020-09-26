@@ -36,12 +36,23 @@ custom:
     dockerizePip: non-linux
 
 functions:
-  getUser:
-    handler: users/list.list
+  # getRecipes:
+  #   handler: users/recipeManager.getRecipes
+  #   events:
+  #     - http:
+  #         path: user
+  #         method: get
+
+  getRecipes:
+    handler: users/recipeManager.getRecipes
     events:
       - http:
-          path: user
+          path: recipes/{recipe_id}
           method: get
+          request:
+            parameters:
+              paths:
+                recipe_id: true
 
   # signUpUser:
   #   handler: users/authentication.signUp
