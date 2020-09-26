@@ -36,7 +36,7 @@ custom:
     dockerizePip: non-linux
 
 functions:
-  getRecipe:
+  getRecipes:
     handler: users/recipeManager.getRecipes
     events:
       - http:
