@@ -1,14 +1,26 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { TouchableHighlight } from 'react-native-gesture-handler';
 import List from './List';
 import HomePage from './Home';
 import Recipe from './Recipe';
 
 const Stack = createStackNavigator();
+
+const table = {
+	recipes: [
+		{ key: 1,  title: 'Pasta', ingredients: [], content: ''},
+		{ key: 2,  title: 'Pasta', ingredients: [], content: '' },
+		{ key: 3,  title: 'Pasta', ingredients: [], content: '' },
+		{ key: 4,  title: 'Pasta', ingredients: [], content: '' },
+		{ key: 5,  title: 'Pasta', ingredients: [], content: '' },
+		{ key: 6,  title: 'Pasta', ingredients: [], content: '' },
+		{ key: 7,  title: 'Pasta', ingredients: [], content: '' },
+		{ key: 8,  title: 'Pasta', ingredients: [], content: '' },
+		{ key: 9,  title: 'Pasta', ingredients: [], content: '' },
+		{ key: 10,  title: 'Pasta', ingredients: [], content: '' },
+	],
+};
 
 export default class App extends React.Component {
 	constructor(props) {
@@ -25,10 +37,10 @@ export default class App extends React.Component {
 						{(props) => <HomePage {...props} />}
 					</Stack.Screen>
 					<Stack.Screen name="List">
-						{(props) => <List {...props} />}
+						{props => <List {...props} recipes={table.recipes} />}
 					</Stack.Screen>
 					<Stack.Screen name="Recipe">
-						{(props) => <Recipe {...props} />}
+						{(props) => <Recipe {...props} recipes={table.recipes} />}
 					</Stack.Screen>
 				</Stack.Navigator>
 			</NavigationContainer>

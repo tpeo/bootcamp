@@ -8,14 +8,14 @@ export default class Recipe extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { recipes: this.props.recipes };
-		var current = this.props.current;
-		this.id = props.route.params.id;
+		recipes = this.props.recipes
+		current = this.props.route.params.current;
 	}
 
 	render() {
 		return (
 			<View style={styles.container}>
-				{this.state.users.map((user) => {
+				{/* {this.state.users.map((user) => {
 					return (
 						<View
 							style={{ flexDirection: 'row', marginLeft: 20, marginRight: 20 }}
@@ -28,7 +28,7 @@ export default class Recipe extends React.Component {
 							</Text>
 						</View>
 					);
-				})}
+				})} */}
 			</View>
 		);
 	}

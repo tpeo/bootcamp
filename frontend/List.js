@@ -4,32 +4,19 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableHighlight } from 'react-native-gesture-handler';
 
-const map = '';
 
 export default class List extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			recipes: [
-				{ key: 'Home' },
-				{ key: 'Spaghetti' },
-				{ key: 'Pasta' },
-				{ key: 'Sandwich' },
-				{ key: 'James' },
-				{ key: 'Joel' },
-				{ key: 'John' },
-				{ key: 'Jillian' },
-				{ key: 'Jimmy' },
-				{ key: 'Julie' },
-			],
-		};
+		this.state = {};
+		recipes = this.props.recipes;
 	}
 
 	render() {
 		return (
 			<View style={styles.container}>
 				<FlatList
-					data={this.state.recipes}
+					data={recipes}
 					renderItem={({ item }) => (
 						<View>
 							<Text>{item.key}</Text>
@@ -39,7 +26,7 @@ export default class List extends React.Component {
 										current: item.key,
 									})
 								}
-								title="hello"
+								title={item.title}
 							/>
 						</View>
 					)}
