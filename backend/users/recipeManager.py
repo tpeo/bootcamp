@@ -9,12 +9,30 @@ dynamodb = boto3.resource('dynamodb', region_name='us-east-1',
 recipeTable = dynamodb.Table('bootcamp_recipes')
 
 
-def getRecipes(event, context):
-    # load data
-    data = json.loads(event['body'])
+# if this was a post
+# def getRecipes(event, context):
+#     # load data
+#     data = json.loads(event['body'])
 
+#     # get item
+#     recipeItem = recipeTable.get_item(Key={'recipe_id': data['recipe_id']})
+
+#     # create a response
+#     response = {
+#         "statusCode": 200,
+#         "headers": {},
+#         "body": json.dumps(recipeItem['Item'], cls=decimalencoder.DecimalEncoder)
+#     }
+
+#     return response
+
+# if this is a get
+def getRecipes(event, context):
     # get item
-    recipeItem = recipeTable.get_item(Key={'recipe_id': data['recipe_id']})
+    recipeItem = recipeTable.get_item(
+        Key={'recipe_id': int(event['pathParameters']['recipe_id'])})
+
+    recipeItem['Item']['ingredients'] = list(recipeItem['Item']['ingredients'])
 
     # create a response
     response = {
