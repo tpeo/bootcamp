@@ -2,43 +2,36 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 import { TouchableHighlight } from 'react-native-gesture-handler';
-import Recipe from './Recipe'
+import List from './List';
+import HomePage from './Home';
+import Recipe from './Recipe';
 
-const Stack =  createStackNavigator()
-
-const HomePage = (props) => {
-  return (
-    <View style={styles.container}>
-      <Text>Home Page</Text>
-      <TouchableHighlight style={{width: 100, height: 40, backgroundColor: 'black', justifyContent:  'center'}} onPress={()  => props.navigation.navigate('Recipe', {id: 'Me9CpZ5RbSczZw6coJXh'})}>
-        <Text style={{color: 'white', textAlign: 'center', textAlignVertical: 'center'}}>Go to Recipe</Text>
-      </TouchableHighlight>
-    </View>
-  );
-}
+const Stack = createStackNavigator();
 
 export default class App extends React.Component {
+	constructor(props) {
+		super(props);
 
-  render() {
+		this.state = {};
+	}
 
-    return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" component={HomePage} />
-          <Stack.Screen name="Recipe" component={Recipe} />
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
-
-  }
+	render() {
+		return (
+			<NavigationContainer>
+				<Stack.Navigator>
+					<Stack.Screen name="Home">
+						{(props) => <HomePage {...props}/>}
+					</Stack.Screen>
+					<Stack.Screen name="List">
+						{(props) => <List {...props}/>}
+					</Stack.Screen>
+          <Stack.Screen name="Recipe">
+						{(props) => <Recipe {...props}/>}
+					</Stack.Screen>
+				</Stack.Navigator>
+			</NavigationContainer>
+		);
+	}
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});

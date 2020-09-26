@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import fb from './firebase';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { TouchableHighlight } from 'react-native-gesture-handler';
@@ -8,7 +7,8 @@ import { TouchableHighlight } from 'react-native-gesture-handler';
 export default class Recipe extends React.Component {
 	constructor(props) {
 		super(props);
-        this.state = { users: [] };
+		this.state = { recipes: this.props.recipes};
+		var current = this.props.current
         this.id = props.route.params.id;
 	}
 
@@ -21,10 +21,10 @@ export default class Recipe extends React.Component {
 							style={{ flexDirection: 'row', marginLeft: 20, marginRight: 20 }}
 						>
 							<Text style={{ fontSize: 24, fontWeight: 'bold' }}>
-								{user.name}
+								{this.recipes.current.title}
 							</Text>
 							<Text style={{ marginLeft: 'auto', fontSize: 20 }}>
-								{user.email}
+								{this.current.ingredients}
 							</Text>
 						</View>
 					);
