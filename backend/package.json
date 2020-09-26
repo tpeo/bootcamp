@@ -1,0 +1,13 @@
+{
+  "name": "TPEO_Backend",
+  "version": "1.0.0",
+  "description": "Serverless backend for ...",
+  "author": "TPEO Eng",
+  "license": "MIT",
+  "dependencies": {
+    "docker-machine": "^3.0.0"
+  },
+  "devDependencies": {
+    "serverless-python-requirements": "^4.3.0"
+  }
+}
