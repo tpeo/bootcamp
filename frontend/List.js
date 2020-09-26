@@ -1,9 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { TouchableHighlight } from 'react-native-gesture-handler';
-
 
 export default class List extends React.Component {
 	constructor(props) {
@@ -16,10 +12,20 @@ export default class List extends React.Component {
 		return (
 			<View style={styles.container}>
 				<FlatList
+					style={{ marginTop: 40 }}
 					data={recipes}
 					renderItem={({ item }) => (
-						<View>
-							<Text>{item.key}</Text>
+						<View style={{ marginBottom: 10 }}>
+							<Text
+								style={{
+									padding: 10,
+									width: 50,
+									fontSize: 18,
+									color: 'black',
+								}}
+							>
+								{item.key}
+							</Text>
 							<Button
 								onPress={() =>
 									this.props.navigation.push('Recipe', {
@@ -39,12 +45,10 @@ export default class List extends React.Component {
 
 const styles = StyleSheet.create({
 	container: {
-		flex: 1,
-		backgroundColor: '#fff',
-		justifyContent: 'center',
+		backgroundColor: 'lightblue',
 	},
 	item: {
-		padding: 10,
+		padding: 5,
 		fontSize: 18,
 		height: 44,
 	},

@@ -9,16 +9,16 @@ const Stack = createStackNavigator();
 
 const table = {
 	recipes: [
-		{ key: 1,  title: 'Pasta', ingredients: [], content: ''},
-		{ key: 2,  title: 'Pasta', ingredients: [], content: '' },
-		{ key: 3,  title: 'Pasta', ingredients: [], content: '' },
-		{ key: 4,  title: 'Pasta', ingredients: [], content: '' },
-		{ key: 5,  title: 'Pasta', ingredients: [], content: '' },
-		{ key: 6,  title: 'Pasta', ingredients: [], content: '' },
-		{ key: 7,  title: 'Pasta', ingredients: [], content: '' },
-		{ key: 8,  title: 'Pasta', ingredients: [], content: '' },
-		{ key: 9,  title: 'Pasta', ingredients: [], content: '' },
-		{ key: 10,  title: 'Pasta', ingredients: [], content: '' },
+		{ key: 1, title: 'Pasta', ingredients: ['idk smth else'], content: 'smth else' },
+		{ key: 2, title: 'Pasta', ingredients: [], content: 'new stuff' },
+		{ key: 3, title: 'Pasta', ingredients: [], content: '' },
+		{ key: 4, title: 'Pasta', ingredients: [], content: '' },
+		{ key: 5, title: 'Pasta', ingredients: [], content: '' },
+		{ key: 6, title: 'Pasta', ingredients: [], content: '' },
+		{ key: 7, title: 'Pasta', ingredients: [], content: '' },
+		{ key: 8, title: 'Pasta', ingredients: [], content: '' },
+		{ key: 9, title: 'Pasta', ingredients: [], content: '' },
+		{ key: 10, title: 'Pasta', ingredients: [], content: '' },
 	],
 };
 
@@ -26,18 +26,31 @@ export default class App extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {};
+		// this.state = {
+		// 	x: 5
+		// };
 	}
+
+	// printAndAdd = (y) => {
+	// 	console.log(this.state.x + y)
+
+	// 	if (this.state.x > 4) {
+	// 		this.setState({
+	// 		x:7
+	// 	});
+	// }
+	// 	return this.state.x +y
+	// }
 
 	render() {
 		return (
 			<NavigationContainer>
 				<Stack.Navigator>
-					<Stack.Screen name="Home">
+					<Stack.Screen name="Home" options={{ title: "Neil's Recipe Book" }}>
 						{(props) => <HomePage {...props} />}
 					</Stack.Screen>
-					<Stack.Screen name="List">
-						{props => <List {...props} recipes={table.recipes} />}
+					<Stack.Screen name="List" options={{ title: "Table of Contents" }}>
+						{(props) => <List {...props} recipes={table.recipes} />}
 					</Stack.Screen>
 					<Stack.Screen name="Recipe">
 						{(props) => <Recipe {...props} recipes={table.recipes} />}
