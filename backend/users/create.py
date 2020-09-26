@@ -5,7 +5,8 @@ import time
 import uuid
 from modules import customfuncs
 import boto3
-dynamodb = boto3.resource('dynamodb', region_name='us-east-1', endpoint_url='https://dynamodb.us-east-1.amazonaws.com')
+dynamodb = boto3.resource('dynamodb', region_name='us-east-1',
+                          endpoint_url='https://dynamodb.us-east-1.amazonaws.com')
 
 
 def create(event, context):
@@ -17,23 +18,23 @@ def create(event, context):
 
     timestamp = int(time.time() * 1000)
 
-    table = dynamodb.Table('SwipeMeIn_Users')
+    table = dynamodb.Table('bootcamp_recipes')
 
     userItem = customfuncs.getItemObj("users", data)
     userItem['name'] = userItem['firstName'] + " " + userItem['lastName']
-    
-    #descriptive stats
+
+    # descriptive stats
     userItem['mealsBought'] = 0
-    userItem['mealsSold'] =  0
+    userItem['mealsSold'] = 0
     userItem['dollarsMade'] = 0
     userItem['dollarsSaved'] = 0
-    userItem[]'dollarsDonated'] = 0
+    userItem[]'dollarsDonated']= 0
 
     # write the todo to the database
     table.put_item(Item=userItem)
 
     # create a response
-    response = {
+    response= {
         "statusCode": 200,
         "headers": customfuncs.headers,
         "body": json.dumps(item)

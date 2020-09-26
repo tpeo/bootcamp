@@ -1,7 +1,7 @@
 {
-  "name": "TPEO_Backend",
+  "name": "bootcamp",
   "version": "1.0.0",
-  "description": "Serverless backend for ...",
+  "description": "Serverless backend for TPEO bootcamp!",
   "author": "TPEO Eng",
   "license": "MIT",
   "dependencies": {

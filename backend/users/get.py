@@ -5,19 +5,22 @@ from modules import decimalencoder
 from users import authorization
 from modules import customfuncs
 import boto3
-dynamodb = boto3.resource('dynamodb', region_name='us-east-1', endpoint_url='https://dynamodb.us-east-1.amazonaws.com')
+dynamodb = boto3.resource('dynamodb', region_name='us-east-1',
+                          endpoint_url='https://dynamodb.us-east-1.amazonaws.com')
+
 
 def getPrivateInfo(event, context):
     data = json.loads(event['body'])
-    table = dynamodb.Table('TPEO_Backend')
+    table = dynamodb.Table('bootcamp_recipes')
     authData = {}
-    #check for required parameters
+    # check for required parameters
     if 'email' not in data:
         return customfuncs.returnError("Missing parameters")
 
     if 'tokens' in data:
-        authData = authorization.authorizeUserWithTokens(data['tokens'], data['email'])
-        #check if call is authorized
+        authData = authorization.authorizeUserWithTokens(
+            data['tokens'], data['email'])
+        # check if call is authorized
         if authData['valid'] == False:
             return customfuncs.returnError("Unauthorized")
     else:
@@ -28,7 +31,7 @@ def getPrivateInfo(event, context):
     if 'Item' not in result:
         return customfuncs.returnError("User no longer exists")
 
-    #delete sensitive info
+    # delete sensitive info
     result['Item'].pop('passHash', None)
     result['Item'].pop('wePayTokenHash', None)
     result['Item'].pop('wePayCardId', None)
