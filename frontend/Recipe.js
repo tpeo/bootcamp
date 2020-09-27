@@ -16,7 +16,7 @@ export default class Recipe extends React.Component {
 		return (
 			<View style={styles.container}>
 				{this.state.recipes.map((recipe) => {
-					if (recipe.key == this.current) {
+					if (recipe.recipe_id.N == this.current) {
 						return (
 							<View
 								style={{
@@ -26,13 +26,13 @@ export default class Recipe extends React.Component {
 								}}
 							>
 								<Text style={{ fontSize: 24, fontWeight: 'bold' }}>
-									{recipe.title}
+									{recipe.title.S}
 								</Text>
 								<Text style={{ marginLeft: 'auto', fontSize: 20 }}>
-									{recipe.content}
+									{recipe.content.S}
 								</Text>
 								<Text style={{ marginLeft: 'auto', fontSize: 20 }}>
-									{recipe.ingredients.map((ingredient) => {
+									{recipe.ingredients.SS.map((ingredient) => {
 										return <Text>{ingredient}</Text>;
 									})}
 								</Text>

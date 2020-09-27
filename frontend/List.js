@@ -4,8 +4,8 @@ import { StyleSheet, Text, View, FlatList, Button } from 'react-native';
 export default class List extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {};
-		recipes = this.props.recipes;
+		this.state = {recipes: this.props.recipes};
+		console.log(this.props)
 	}
 
 	render() {
@@ -13,7 +13,7 @@ export default class List extends React.Component {
 			<View style={styles.container}>
 				<FlatList
 					style={{ marginTop: 40 }}
-					data={recipes}
+					data={this.state.recipes}
 					renderItem={({ item }) => (
 						<View style={{ marginBottom: 10 }}>
 							<Text
@@ -24,19 +24,19 @@ export default class List extends React.Component {
 									color: 'black',
 								}}
 							>
-								{item.key}
+								{item.recipe_id.N}
 							</Text>
 							<Button
 								onPress={() =>
 									this.props.navigation.push('Recipe', {
-										current: item.key,
+										current: item.recipe_id.N,
 									})
 								}
-								title={item.title}
+								title={item.title.S}
 							/>
 						</View>
 					)}
-					keyExtractor={(item) => item.key}
+					keyExtractor={(item) => item.recipe_id.N}
 				/>
 			</View>
 		);
