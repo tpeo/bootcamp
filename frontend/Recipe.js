@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 export default class Recipe extends React.Component {
 	constructor(props) {
@@ -8,9 +9,9 @@ export default class Recipe extends React.Component {
 		this.current = this.props.route.params.current;
 	}
 
-	printAndAdd = (x,y) => {
-		this.state
-	}
+	printAndAdd = (x, y) => {
+		this.state;
+	};
 
 	render() {
 		return (
@@ -20,22 +21,43 @@ export default class Recipe extends React.Component {
 						return (
 							<View
 								style={{
-									flexDirection: 'row',
+									flexDirection: 'column',
 									marginLeft: 20,
 									marginRight: 20,
 								}}
 							>
-								<Text style={{ fontSize: 24, fontWeight: 'bold' }}>
-									{recipe.title.S}
-								</Text>
-								<Text style={{ marginLeft: 'auto', fontSize: 20 }}>
-									{recipe.content.S}
-								</Text>
-								<Text style={{ marginLeft: 'auto', fontSize: 20 }}>
-									{recipe.ingredients.SS.map((ingredient) => {
-										return <Text>{ingredient}</Text>;
-									})}
-								</Text>
+								<ScrollView>
+									<Text
+										style={{
+											fontSize: 24,
+											fontWeight: 'bold',
+											paddingBottom: 100,
+										}}
+									>
+										{recipe.title.S}
+									</Text>
+
+									<Text
+										style={{
+											marginLeft: 'auto',
+											fontSize: 20,
+											paddingBottom: 50,
+										}}
+									>
+										{recipe.content.S}
+									</Text>
+									<Text
+										style={{ marginLeft: 'auto', fontSize: 20, padding: 50 }}
+									>
+										{recipe.ingredients.SS.map((ingredient) => {
+											return (
+												<View style={{ padding: 15, width: 400 }}>
+													<Text>{ingredient}</Text>
+												</View>
+											);
+										})}
+									</Text>
+								</ScrollView>
 							</View>
 						);
 					}
