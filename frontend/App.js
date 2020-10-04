@@ -7,26 +7,20 @@ import Recipe from "./screens/Recipe";
 
 const Stack = createStackNavigator();
 
-export default class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <NavigationContainer>
-        <Stack.Navigator>
-          <Stack.Screen name="Home" options={{ title: "Neil's Recipe Book" }}>
-            {(props) => <HomePage {...props} />}
-          </Stack.Screen>
-          <Stack.Screen name="List" options={{ title: "Table of Contents" }}>
-            {(props) => <List {...props} />}
-          </Stack.Screen>
-          <Stack.Screen name="Recipe">
-            {(props) => <Recipe {...props} />}
-          </Stack.Screen>
-        </Stack.Navigator>
-      </NavigationContainer>
-    );
-  }
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" options={{ title: "Neil's Recipe Book" }}>
+          {(props) => <HomePage {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="List" options={{ title: "Table of Contents" }}>
+          {(props) => <List {...props} />}
+        </Stack.Screen>
+        <Stack.Screen name="Recipe">
+          {(props) => <Recipe {...props} />}
+        </Stack.Screen>
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
 }

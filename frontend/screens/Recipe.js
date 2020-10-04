@@ -1,42 +1,39 @@
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import React, { useEffect, useState } from "react";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 
-export default class Recipe extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      recipe: {
-        title: "",
-        ingredients: [],
-        content: "",
-      },
+export default function Recipe(props) {
+  const [recipe, setRecipe] = useState({
+    title: "",
+    ingredients: [],
+    content: "",
+  });
+
+  const recipeId = props.route.params.current;
+
+  useEffect(() => {
+    console.log(`Fetching recipe ${recipeId}`);
+
+    const fetchData = async () => {
+      const response = await fetch(
+        `https://rso94yuira.execute-api.us-east-1.amazonaws.com/dev/recipes/${recipeId}`
+      );
+      setRecipe(await response.json());
     };
-  }
+    fetchData();
+  }, [recipeId]);
 
-  async componentDidMount() {
-    const response = await fetch(
-      `https://rso94yuira.execute-api.us-east-1.amazonaws.com/dev/recipes/${this.props.route.params.current}`
-    );
-    const json = await response.json();
-    this.setState({ recipe: json });
-  }
+  var { title, ingredients, content } = recipe;
 
-  render() {
-    var { title, ingredients, content } = this.state.recipe;
-
-    return (
-      <View style={styles.container}>
-        <ScrollView style={styles.scrollview}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.content}>{content}</Text>
-          {ingredients.map((ingredient) => (
-            <Text style={styles.ingredient}>{ingredient}</Text>
-          ))}
-        </ScrollView>
-      </View>
-    );
-  }
+  return (
+    <View style={styles.container}>
+      <ScrollView style={styles.scrollview}>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.content}>{content}</Text>
+        <Text style={styles.ingredient}>{ingredients.join("\n")}</Text>
+      </ScrollView>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -46,9 +43,8 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
   },
   scrollview: {
-    flexDirection: "column",
-    marginLeft: 20,
-    marginRight: 20,
+    // flexDirection: "column",
+    paddingHorizontal: 20,
   },
   title: {
     fontSize: 24,
@@ -62,6 +58,5 @@ const styles = StyleSheet.create({
   },
   ingredient: {
     paddingBottom: 5,
-    width: 400,
   },
 });
