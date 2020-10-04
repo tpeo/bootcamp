@@ -40,10 +40,10 @@ export default class App extends React.Component {
 	}
 
 	async componentDidMount() {
-		const response = await fetch('https://rso94yuira.execute-api.us-east-1.amazonaws.com/dev/recipes/1')
+		const response = await fetch('https://rso94yuira.execute-api.us-east-1.amazonaws.com/dev/recipes')
 		const json = await response.json()
-		this.setState({recipes: json.Items})
-		console.log(this.state)
+		json.sort((a, b) => (a.recipe_id > b.recipe_id))
+		this.setState({recipes: json})
 	}
 
 	// printAndAdd = (y) => {
@@ -68,7 +68,7 @@ export default class App extends React.Component {
 						{(props) => <List {...props} recipes={this.state.recipes} />}
 					</Stack.Screen>
 					<Stack.Screen name="Recipe">
-						{(props) => <Recipe {...props} recipes={this.state.recipes} />}
+						{(props) => <Recipe {...props} />}
 					</Stack.Screen>
 				</Stack.Navigator>
 			</NavigationContainer>

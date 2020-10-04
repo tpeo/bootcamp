@@ -5,8 +5,17 @@ import { ScrollView } from 'react-native-gesture-handler';
 export default class Recipe extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { recipes: this.props.recipes };
-		this.current = this.props.route.params.current;
+		this.state = {
+			recipe: null,
+		};
+	}
+
+	async componentDidMount() {
+		const response = await fetch(
+			`https://rso94yuira.execute-api.us-east-1.amazonaws.com/dev/recipes/${this.props.route.params.current}`
+		);
+		const json = await response.json();
+		this.setState({ recipe: json });
 	}
 
 	printAndAdd = (x, y) => {
@@ -15,54 +24,17 @@ export default class Recipe extends React.Component {
 
 	render() {
 		return (
-			<View style={styles.container}>
-				{this.state.recipes.map((recipe) => {
-					if (recipe.recipe_id.N == this.current) {
-						return (
-							<View
-								style={{
-									flexDirection: 'column',
-									marginLeft: 20,
-									marginRight: 20,
-								}}
-							>
-								<ScrollView>
-									<Text
-										style={{
-											fontSize: 24,
-											fontWeight: 'bold',
-											paddingBottom: 100,
-										}}
-									>
-										{recipe.title.S}
-									</Text>
-
-									<Text
-										style={{
-											marginLeft: 'auto',
-											fontSize: 20,
-											paddingBottom: 50,
-										}}
-									>
-										{recipe.content.S}
-									</Text>
-									<Text
-										style={{ marginLeft: 'auto', fontSize: 20, padding: 50 }}
-									>
-										{recipe.ingredients.SS.map((ingredient) => {
-											return (
-												<View style={{ padding: 15, width: 400 }}>
-													<Text>{ingredient}</Text>
-												</View>
-											);
-										})}
-									</Text>
-								</ScrollView>
-							</View>
-						);
-					}
-				})}
-			</View>
+			this.state.recipe && (
+				<View style={styles.container}>
+					<ScrollView style={styles.scrollview}>
+						<Text style={styles.title}>{this.state.recipe.title}</Text>
+						<Text style={styles.content}>{this.state.recipe.content}</Text>
+						{this.state.recipe.ingredients.map((ingredient) => (
+							<Text style={styles.ingredient}>{ingredient}</Text>
+						))}
+					</ScrollView>
+				</View>
+			)
 		);
 	}
 }
@@ -71,6 +43,25 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: '#fff',
-		justifyContent: 'center',
+		paddingBottom: 10,
+	},
+	scrollview: {
+		flexDirection: 'column',
+		marginLeft: 20,
+		marginRight: 20,
+	},
+	title: {
+		fontSize: 24,
+		fontWeight: 'bold',
+		paddingTop: 15,
+		paddingBottom: 50,
+	},
+	content: {
+		fontSize: 20,
+		paddingBottom: 50,
+	},
+	ingredient: {
+		paddingBottom: 5,
+		width: 400,
 	},
 });
