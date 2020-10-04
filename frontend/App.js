@@ -1,9 +1,9 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import List from './List';
-import HomePage from './Home';
-import Recipe from './Recipe';
+import List from './screens/List';
+import HomePage from './screens/Home';
+import Recipe from './screens/Recipe';
 
 const Stack = createStackNavigator();
 
@@ -33,10 +33,6 @@ export default class App extends React.Component {
 		this.state = {
 			recipes: []
 		}
-
-		// this.state = {
-		// 	x: 5
-		// };
 	}
 
 	async componentDidMount() {
@@ -45,17 +41,6 @@ export default class App extends React.Component {
 		json.sort((a, b) => (a.recipe_id > b.recipe_id))
 		this.setState({recipes: json})
 	}
-
-	// printAndAdd = (y) => {
-	// 	console.log(this.state.x + y)
-
-	// 	if (this.state.x > 4) {
-	// 		this.setState({
-	// 		x:7
-	// 	});
-	// }
-	// 	return this.state.x +y
-	// }
 
 	render() {
 		return (

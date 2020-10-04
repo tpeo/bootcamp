@@ -12,18 +12,10 @@ export default class HomePage extends React.Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<View
-					style={{
-						flex: 2,
-						marginLeft: 8,
-						height: 200,
-						width: 200,
-						borderRadius: 100,
-					}}
-				>
+				<View style={styles.imageView}>
 					<Image
-						source={require('./assets/me_copy.jpg')}
-						style={{ height: 200, width: 200, borderRadius: 100 }}
+						source={require('../assets/me_copy.jpg')}
+						style={styles.image}
 					/>
 				</View>
 				<View style={styles.title}>
@@ -31,22 +23,10 @@ export default class HomePage extends React.Component {
 				</View>
 				<View>
 					<TouchableHighlight
-						style={{
-							width: 100,
-							height: 40,
-							backgroundColor: 'black',
-							justifyContent: 'center',
-							borderRadius: 40
-						}}
+						style={styles.button}
 						onPress={() => this.props.navigation.navigate('List')}
 					>
-						<Text
-							style={{
-								color: 'white',
-								textAlign: 'center',
-								textAlignVertical: 'center',
-							}}
-						>
+						<Text style={styles.buttonText} >
 							Go to Recipes
 						</Text>
 					</TouchableHighlight>
@@ -67,4 +47,28 @@ const styles = StyleSheet.create({
 	title: {
 		flex: 3,
 	},
+	imageView: {
+		flex: 2,
+		marginLeft: 8,
+		height: 200,
+		width: 200,
+		borderRadius: 100,
+	},
+	image: { 
+		height: 200, 
+		width: 200, 
+		borderRadius: 100
+	},
+	button: {
+		width: 100,
+		height: 40,
+		backgroundColor: 'black',
+		justifyContent: 'center',
+		borderRadius: 40
+	},
+	buttonText: {
+		color: 'white',
+		textAlign: 'center',
+		textAlignVertical: 'center',
+	}
 });

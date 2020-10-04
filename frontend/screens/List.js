@@ -15,16 +15,7 @@ export default class List extends React.Component {
 					data={this.state.recipes}
 					renderItem={({ item }) => (
 						<View style={{ flexDirection: 'row', paddingBottom: 35 }}>
-							<Text
-								style={{
-									padding: 10,
-									width: 50,
-									fontSize: 18,
-									color: 'black',
-								}}
-							>
-								{item.recipe_id}
-							</Text>
+							<Text style={styles.recipe_id}> {item.recipe_id} </Text>
 							<Button
 								onPress={() =>
 									this.props.navigation.push('Recipe', {
@@ -51,4 +42,10 @@ const styles = StyleSheet.create({
 		fontSize: 18,
 		height: 44,
 	},
+	recipe_id: {
+		padding: 10,
+		width: 50,
+		fontSize: 18,
+		color: 'black',
+	}
 });
