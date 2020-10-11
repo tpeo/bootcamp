@@ -27,7 +27,7 @@ recipeTable = dynamodb.Table('bootcamp_recipes')
 #     return response
 
 # if this is a get
-def getRecipes(event, context):
+def getRecipe(event, context):
     # get item
     recipeItem = recipeTable.get_item(
         Key={'recipe_id': int(event['pathParameters']['recipe_id'])})
@@ -42,3 +42,16 @@ def getRecipes(event, context):
     }
 
     return response
+
+def getRecipes(event, context):
+    params = {
+        'ProjectionExpression': '#recipe, title',
+        'ExpressionAttributeNames': {'#recipe': 'recipe_id'}
+    }
+    table_data = recipeTable.scan(**params)
+
+    return {
+        "statusCode": 200,
+        "headers": {},
+        "body": json.dumps(table_data['Items'], cls=decimalencoder.DecimalEncoder)
+    }
